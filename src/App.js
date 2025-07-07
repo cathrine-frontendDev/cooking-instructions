@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './App.css';
 
 function App() {
   const APP_ID = "b6292b0e";
-  const APP_KEY = "3a94401803966455125c2d01a8868570	";
+  const APP_KEY = "3a94401803966455125c2d01a8868570";
+
+  const apiReq = `https://api.edamam.com/api/recipes/v2?app_id=${APP_ID}&app_key=${APP_KEY}`;
+
+  const [counter, setCounter] = useState(0)
+
+  useEffect(() => {
+
+  }, []);
+
+  const getRecipes = async () => {
+    const response =
+  }
 
   return (
     <div className="App">
