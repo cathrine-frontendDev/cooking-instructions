@@ -3,37 +3,39 @@ import Recipe from "./Recipe";
 import './App.css';
 
 function App() {
-  const app_id = "b6292b0e";
-  const app_key = "3a94401803966455125c2d01a8868570";
+  const APP_ID = "b6292b0e";
+  const APP_KEY = "3a94401803966455125c2d01a8868570";
 
   const [recipes, setRecipes] =useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState('chicken'); 
+
   useEffect(() => {
     getRecipes();
   }, [query]);
 
     const getRecipes = async () => {
-    const response = await fetch(`https://api.edamam.com/api/recipes/v2?app_id=${app_id}&app_key=${app_key}type=${public}&q=${chicken&field}=uri&field=label`
+    const response = await fetch(
+      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json()
     setRecipes(data.hits);
-    
   };
 
-  const upDateSearch = e => {
+  const updateSearch = e => {
     setSearch(e.target.value);
   };
 
   const getSearch = e => {
   e.preventDefault();
   setQuery(search);
+  setSearch('');
   };
 
   return (
     <div className="App">
       <form onSubmit={getSearch} className="search-form">
-        <input className="search-bar" type="text" value={search} />
+        <input className="search-bar" type="text" value={search} onChange={updateSearch} />
         <button className="search-button" type="Submit">
           Search
           </button>
@@ -45,7 +47,7 @@ function App() {
         calories={recipe.recipe.calories} 
         image={recipe.recipe.image}
         />
-      ))};
+      ))}
     </div>
   );
 }
